@@ -1,0 +1,41 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger pipeline when pushing to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger pipeline on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use an Ubuntu-based runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the latest code
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Set up Python version
+  
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install dependencies from your `requirements.txt`
+
+      - name: Run tests
+        run: |
+          pytest  # Run your tests (adjust if you use another testing framework)
+
+      - name: Build Docker image
+        run: |
+          docker build -t your-docker-image .  # Build the Docker image
+  
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push your-docker-image  # Push the Docker image to your Docker registry
+
+      - name: Deploy to Cloud
+        run: |
+          # Add deployment commands (e.g., using AWS CLI, Azure CLI, etc.)
