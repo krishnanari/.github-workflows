@@ -28,6 +28,7 @@ jobs:
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
+        pip install pytest
 
     # Step 4: Run tests
     - name: Run Tests
