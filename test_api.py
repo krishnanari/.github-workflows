@@ -1,7 +1,7 @@
 # test_api.py
 import pytest
 from fastapi.testclient import TestClient
-from main import app  # Import the FastAPI app from main.py
+from app import app
 
 # Create an instance of TestClient to test the FastAPI app
 client = TestClient(app)
