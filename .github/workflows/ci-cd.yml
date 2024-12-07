@@ -30,6 +30,8 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
         pip install httpx
+        pip install xgboost
+
 
 
     # Step 4: Run tests
