@@ -33,7 +33,7 @@ jobs:
     # Step 4: Run tests
     - name: Run Tests
       run: |
-        pytest test_api/
+        pytest tests/
 
     # Step 5: Set up Docker
     - name: Log in to Docker Hub
