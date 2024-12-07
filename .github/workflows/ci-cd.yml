@@ -1,0 +1,51 @@
+name: CI/CD Pipeline for Movie Recommendation App
+
+# Define when the workflow should run
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    # Step 3: Install dependencies
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Step 4: Run tests
+    - name: Run Tests
+      run: |
+        pytest tests/
+
+    # Step 5: Set up Docker
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        DOCKER_USERNAME: krish2057
+        DOCKER_PASSWORD: "TN72be9797#&"
+
+    - name: Build Docker Image
+      run: |
+        docker build -t movie-recommendation-app .
+
+    - name: Push Docker Image
+      run: |
+        docker tag movie-recommendation-app <krish9797>/fastapi-app:latest
+        docker push <krish9797>/fastapi-app:latest
