@@ -29,6 +29,8 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install pytest
+        pip install httpx
+
 
     # Step 4: Run tests
     - name: Run Tests
